@@ -1,3 +1,8 @@
+//   moment importavimas
+const moment = require('moment');
+const m = moment();
+console.log(m.format('YYYY-MM-DD'));
+
 // express server
 const express = require('express')
 const app = express()
@@ -27,7 +32,6 @@ con.connect(function (err) {
 });
 
 // cors dalis
-
 const cors = require('cors')
 app.use(cors())
 
@@ -37,7 +41,6 @@ app.use(express.urlencoded({
 app.use(express.json());
 
 // testas
-
 app.get('/labas/:id', (req, res) => {
     res.send(`labas ${req.params.id} tau`)
 })
@@ -45,6 +48,7 @@ app.get('/labas/:id', (req, res) => {
 app.get('/test', (req, res) => {
     res.send(JSON.stringify({ test: 'OK' }))
 })
+
 // 1. Atsispausdiname visus duomenis is duomenu bazes
 app.get('/cats', (req, res) => {
     const sql = `
@@ -52,9 +56,10 @@ app.get('/cats', (req, res) => {
     FROM cats
     `;
     con.query(sql, (err, results) => {
-      if (err) {
-        throw err;
-      }
-      res.send(results);
+        if (err) {
+            throw err;
+        }
+        res.send(results);
+
     })
-  })
+})

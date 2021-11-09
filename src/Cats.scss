@@ -1,0 +1,24 @@
+.cats{
+  // turinio isdestymas
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 50px;
+
+  .cat-design{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+  }
+  .each-cat{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+}

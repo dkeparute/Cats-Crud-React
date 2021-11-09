@@ -1,9 +1,12 @@
 import axios from "axios";
 import { useEffect } from "react";
+import OneCat from "./Components/OneCat";
 
 function App() {
 
-//2. Atvaizduojami visi duomenys is duomenu bazes
+
+
+  //2. Atvaizduojami visi duomenys is duomenu bazes
   useEffect(() => {
     axios.get('http://localhost:3003/cats')
       .then(res => {
@@ -12,8 +15,8 @@ function App() {
   }, [])
 
   return (
-    <div>
-
+    <div className='cats'>
+      <OneCat />
     </div>
   );
 }
