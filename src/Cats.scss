@@ -8,6 +8,7 @@
   flex-wrap: wrap;
   margin-top: 50px;
   background-color: aliceblue;
+  position: relative;
 
   // VISU katinu saraso isdestymas,
   .cats-list {
@@ -81,27 +82,65 @@
         width: 150px;
       }
       // naujo katino lenteles pabaiga
-  }
-}
-button {
-  background-image: linear-gradient(to right, #DA22FF 0%, #9733EE  51%, #DA22FF  100%)
-}
-button {
-          margin: 10px;
-          padding: 15px 45px;
-          text-align: center;
-          text-transform: uppercase;
-          transition: 0.8s;
-          background-size: 200% auto;
-          color: white;            
-          box-shadow: 0 0 20px #eee;
-          border-radius: 10px;
-          display: block;
-          border:1px solid #FFFFFF;
     }
- button:hover {
- background-position: right center; /* change the direction of the change here*/
-  color: #fff;
-  text-decoration: none;
+  }
+  // modal pozicija
+  .general-modal {
+    border: 1px solid #fff;
+    position: absolute;
+    top: 0;
+    background-color: #da22ff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    flex-wrap: wrap;
+    // modalo bendras fonas, sriftas, dydis
+    .each-module {
+      border: 1px solid #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      flex-wrap: wrap;
+      padding: 10px;
+      margin: 20px;
+      font-size: 20px;
+      color: #234d4f;
+      text-align: center;
+      font-weight: bold;
+      background-color: darkgray;
+      // span dizainas
+      span {
+        color: darkorange;
+      }
+      // lenteles dydis, dizainas ir jame atvaizduojami duomenys is serverio
+      input {
+        width: 150px;
+        color: #a55a86;
+      }
+    }
+  }
+  button {
+    background-image: linear-gradient(to right, #da22ff 0%, #9733ee 51%, #da22ff 100%);
+  }
+  button {
+    margin: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.8s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
+    border: 1px solid #ffffff;
+  }
+  button:hover {
+    background-position: right center; /* change the direction of the change here*/
+    color: #fff;
+    text-decoration: none;
   }
 }

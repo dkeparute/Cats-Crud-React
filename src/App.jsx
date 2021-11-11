@@ -1,9 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import CatModal from "./Components/CatModal";
 import CatsList from "./Components/CatsList";
 import NewCat from "./Components/NewCat";
 
 function App() {
+
+  // 18. sukuriamas STATE skirta sparodyti arba paslepti modala ir perduodame per APP i modal komponenta
+const [showModal, setShowModal] = useState(false);
 
 // 13. tam kad pasikeistu informacija tada kai ji tikrai pasikeicia
  const [update, setUpdate] = useState(Date.now());
@@ -11,8 +15,17 @@ function App() {
   //4.  sukuriamas allcats hookas nurodantis STATE 
   const [allCats, setAllCats] = useState([]);
 
-// 9. Irasymas i duomenu baze, gauta gyvuna siuncia i serveri
+// 20. sukuriam modala ir perduodam modal per catslist iki onecat komponento
+const modal = () => {
+  setShowModal(true);
+}
 
+// 26. sukuriam hide funkcija jog paspaudus mygtuka modalas dingtu
+const hide = () => {
+  setShowModal(false);
+}
+
+// 9. Irasymas i duomenu baze, gauta gyvuna siuncia i serveri
 const create = oneCat => {
   axios.post('http://localhost:3003/cats', oneCat)
   .then(res => {
@@ -37,7 +50,9 @@ const create = oneCat => {
     <div className='cats'>
       {/* 11. create perduodame kaip propsa */}
       <NewCat create={create}/>
-      <CatsList allCats={allCats} />
+
+      <CatsList allCats={allCats} modal={modal}/>
+      <CatModal showModal={showModal} hide={hide}/>
     </div>
   );
 }
