@@ -4,7 +4,8 @@ function OneCat({ oneCat, modal }) {
 
     // 22. perduodam modal funkcija
     const showEdit = () => {
-        modal();
+        // 27 i modal idedam kate
+        modal(oneCat);
     }
 
     return (

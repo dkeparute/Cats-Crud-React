@@ -84,3 +84,40 @@ app.post('/cats', (req, res) => {
 
     })
 })
+
+// 35. editina katina
+app.put('/cats/:id', (req, res) => {
+    const sql = `
+    UPDATE cats
+    SET breed = ?, size = ?, behaviour = ?, age= ?
+    WHERE id = ?
+    `;
+    con.query(sql, [
+        req.body.breed,
+        req.body.size,
+        req.body.behaviour,
+        req.body.age,
+        req.params.id
+    ], (err, results) => {
+        if (err) {
+            throw err;
+        }
+        res.send(results);
+
+    })
+})
+
+// 39 triname gyvuna 
+app.delete('/cats/:id', (req, res) => {
+    const sql = `
+    DELETE from cats
+    WHERE id = ?
+    `;
+    con.query(sql, [req.params.id], (err, results) => {
+        if (err) {
+            throw err;
+        }
+        res.send(results);
+
+    })
+})
