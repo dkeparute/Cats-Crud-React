@@ -1,11 +1,11 @@
 import OneCat from "./OneCat";
 
-// 5. Sukuriamas visu kaciu komponentas ir tuo paciu dar naujas propsas
-function CatsList({catsList}) {
+// 3. sukuriamas katinu saraso komponentas kuriame perkeliamas propsas is App ir cia sumepinam viska su vienu katinu
+function CatsList({allCats}) {
 
     return (
         <div className='cats-list'>
-            {catsList.map(oneCat => <OneCat></OneCat>)}
+            {allCats.map(oneCat => <OneCat key={oneCat.id} oneCat={oneCat}></OneCat>)}
         </div>
     );
 

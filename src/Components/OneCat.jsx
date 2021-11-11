@@ -1,5 +1,5 @@
-
-// 4. Sukuriamas vienos kates komponentas, kuriame israsoma kates charakteristika ir sukuriamas propsas 
+// 5. sukuriamas vieno gyvuno komponentas kuriam perduodamas propsas is catslist komponento
+// cia parasoma vieno katino charakteristika
 function OneCat({oneCat}) {
 
     return (

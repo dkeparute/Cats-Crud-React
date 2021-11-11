@@ -1,4 +1,4 @@
-.cats{
+.cats {
   // turinio isdestymas
   display: flex;
   flex-direction: row;
@@ -7,18 +7,103 @@
   align-items: center;
   flex-wrap: wrap;
   margin-top: 50px;
+  background-color: aliceblue;
 
-  .cat-design{
+  // VISU katinu saraso isdestymas,
+  .cats-list {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: baseline;
+    justify-items: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: beige;
   }
-  .each-cat{
+  // vieno katino bendras fonas, sriftas, dydis
+  .cat-design {
+    border: 1px solid #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     flex-wrap: wrap;
+    padding: 10px;
+    margin: 20px;
+    font-size: 20px;
+    color: #234d4f;
+    text-align: center;
+    font-weight: bold;
+    background-color: aqua;
+    // span dizainas
+    span {
+      color: #eff3f3;
+    }
+    // db dizainas
+    .each-cat {
+      font-weight: bold;
+      font-style: italic;
+      text-transform: uppercase;
+      color: #a55a86;
+    }
+    // VIENO katino lenteles pabaiga
   }
+  // naujo katino isdestymas
+  .general-new-cat {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: rgb(230, 230, 70);
+    // naujo katino bendras fonas, sriftas, dydis
+    .new-cat {
+      border: 1px solid #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      flex-wrap: wrap;
+      padding: 10px;
+      margin: 20px;
+      font-size: 20px;
+      color: #234d4f;
+      text-align: center;
+      font-weight: bold;
+      background-color: darkgray;
+      // span dizainas
+      span {
+        color: darkorange;
+      }
+      // lenteles dydis, dizainas ir jame atvaizduojami duomenys is db
+      input {
+        color: #a55a86;
+        width: 150px;
+      }
+      // naujo katino lenteles pabaiga
+    }
+    button {
+      background-image: linear-gradient(to right, #DA22FF 0%, #9733EE  51%, #DA22FF  100%)
+    }
+    button {
+              margin: 10px;
+              padding: 15px 45px;
+              text-align: center;
+              text-transform: uppercase;
+              transition: 0.8s;
+              background-size: 200% auto;
+              color: white;            
+              box-shadow: 0 0 20px #eee;
+              border-radius: 10px;
+              display: block;
+              border:1px solid #FFFFFF;
+        }
+     button:hover {
+     background-position: right center; /* change the direction of the change here*/
+      color: #fff;
+      text-decoration: none;
+      }
+  
+  }
+  // modalas
 }

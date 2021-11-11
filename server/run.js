@@ -49,7 +49,7 @@ app.get('/test', (req, res) => {
     res.send(JSON.stringify({ test: 'OK' }))
 })
 
-// 1. Atsispausdiname visus duomenis is duomenu bazes
+// 1. Atsispausdiname visus duomenis is duomenu bazes naudojant GET
 app.get('/cats', (req, res) => {
     const sql = `
     SELECT *

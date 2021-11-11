@@ -1,8 +1,13 @@
 import axios from "axios";
-import { useEffect } from "react";
-import OneCat from "./Components/OneCat";
+import { useEffect, useState } from "react";
+import CatsList from "./Components/CatsList";
+import NewCat from "./Components/NewCat";
 
 function App() {
+
+
+  //4.  sukuriamas allcats hookas nurodantis STATE 
+  const [allCats, setAllCats] = useState([]);
 
 
 
@@ -10,13 +15,17 @@ function App() {
   useEffect(() => {
     axios.get('http://localhost:3003/cats')
       .then(res => {
+        // 5. pasetinam visas kates
+        setAllCats(res.data)
         console.log(res.data);
       })
+
   }, [])
 
   return (
     <div className='cats'>
-      <OneCat />
+      <NewCat/>
+      <CatsList allCats={allCats} />
     </div>
   );
 }
