@@ -12,6 +12,8 @@ function OneCat({oneCat}) {
             <div  className='each-cat'>{oneCat.behaviour}</div>
             <span>Age: </span>
             <div  className='each-cat'>{oneCat.age}</div>
+            {/*16. sukuriamas mygtukas */}
+            <button>Edit</button>
         </div>
     );
 

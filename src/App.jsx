@@ -5,6 +5,8 @@ import NewCat from "./Components/NewCat";
 
 function App() {
 
+// 13. tam kad pasikeistu informacija tada kai ji tikrai pasikeicia
+ const [update, setUpdate] = useState(Date.now());
 
   //4.  sukuriamas allcats hookas nurodantis STATE 
   const [allCats, setAllCats] = useState([]);
@@ -14,6 +16,8 @@ function App() {
 const create = oneCat => {
   axios.post('http://localhost:3003/cats', oneCat)
   .then(res => {
+    // 15 setinam naujausia update
+    setUpdate(Date.now());
     console.log(res.data);
   })
 }
@@ -26,8 +30,8 @@ const create = oneCat => {
         setAllCats(res.data)
         console.log(res.data);
       })
-
-  }, [])
+//  14. seka update
+  }, [update])
 
   return (
     <div className='cats'>
