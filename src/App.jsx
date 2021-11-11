@@ -9,7 +9,14 @@ function App() {
   //4.  sukuriamas allcats hookas nurodantis STATE 
   const [allCats, setAllCats] = useState([]);
 
+// 9. Irasymas i duomenu baze, gauta gyvuna siuncia i serveri
 
+const create = oneCat => {
+  axios.post('http://localhost:3003/cats', oneCat)
+  .then(res => {
+    console.log(res.data);
+  })
+}
 
   //2. Atvaizduojami visi duomenys is duomenu bazes
   useEffect(() => {
@@ -24,7 +31,8 @@ function App() {
 
   return (
     <div className='cats'>
-      <NewCat/>
+      {/* 11. create perduodame kaip propsa */}
+      <NewCat create={create}/>
       <CatsList allCats={allCats} />
     </div>
   );

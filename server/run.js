@@ -63,3 +63,24 @@ app.get('/cats', (req, res) => {
 
     })
 })
+
+// 10. Irasymas i duomenu baze
+app.post('/cats', (req, res) => {
+    const sql = `
+    INSERT INTO cats
+    (breed, size, behaviour, age)
+    VALUES(?, ?, ?, ?)
+    `;
+    con.query(sql, [
+        req.body.breed,
+        req.body.size,
+        req.body.behaviour,
+        req.body.age
+    ], (err, results) => {
+        if (err) {
+            throw err;
+        }
+        res.send(results);
+
+    })
+})
