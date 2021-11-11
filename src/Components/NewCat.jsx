@@ -46,6 +46,7 @@ function NewCat({ create }) {
             </div>
             <button onClick={handlecreate} >Add new cat</button>
         </div>
+
     );
 
 
