@@ -80,7 +80,7 @@ function App() {
   }, [update])
 
   return (
-    <div className='cats>
+    <div className='cats'>
       {/* 11. create perduodame kaip propsa */}
       <NewCat create={create} />
       <CatsList allCats={allCats} modal={modal} />
