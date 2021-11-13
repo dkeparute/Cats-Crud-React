@@ -7,6 +7,12 @@ import NewCat from "./Components/NewCat";
 
 function App() {
 
+  // 42.sukuriamas steitas tam kad butu galima fiksuoti filtravimo rezultatus
+  const [breed, setBreed] = useState([]);
+
+  // 45.sukuriamas filtras, kai jis pasikeis paleisime filtravima
+  const [filter, setFilter] = useState('');
+
   // 18. sukuriamas STATE skirta sparodyti arba paslepti modala ir perduodame per APP i modal komponenta
   const [showModal, setShowModal] = useState(false);
 
@@ -69,6 +75,18 @@ function App() {
       })
   }
 
+// 43. suteikiam reaktui galimybe optimatizuotis, jeigu sudetume i viena vieta, reaktas negaletu optimatizuotis, filtro metu reaktas atsinaujins
+
+useEffect(() => {
+  axios.get('http://localhost:3003/cats-breed')
+    .then(res => {
+      // 44. pasetinam setbreed ir atiduodame i komponenta cat filter per APP
+      setBreed(res.data);
+      console.log(res.data);
+    })
+  //  14. seka update
+}, [update])
+
   //2. Atvaizduojami visi duomenys is duomenu bazes
   useEffect(() => {
     axios.get('http://localhost:3003/cats')
@@ -83,7 +101,7 @@ function App() {
   return (
     <div className='cats'>
       {/* 11. create perduodame kaip propsa */}
-      <CatFilter />
+      <CatFilter breed={breed} />
       <NewCat create={create} />
       <CatsList allCats={allCats} modal={modal} />
       <CatModal showModal={showModal} hide={hide} modalInput={modalInput} edit={edit} remove={remove} />
