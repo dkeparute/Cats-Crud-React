@@ -80,7 +80,7 @@ function App() {
     if (filter) {
       axios.get('http://localhost:3003/cats-filter/' + filter)
         .then(res => {
-          setBreed(res.data);
+          setAllCats(res.data);
           console.log(res.data);
         })
     }
@@ -94,7 +94,6 @@ function App() {
         setBreed(res.data);
         console.log(res.data);
       })
-    //  14. seka update
   }, [update])
 
   //2. Atvaizduojami visi duomenys is duomenu bazes
@@ -112,7 +111,7 @@ function App() {
     <div className='cats'>
       {/* 11. create perduodame kaip propsa */}
       {/*47. kai keiciasi filtras tai turi pasisetinti elementai */}
-      <CatFilter breed={breed} setFilter={setFilter} />
+      <CatFilter breed={breed} filter={setFilter} />
       <NewCat create={create} />
       <CatsList allCats={allCats} modal={modal} />
       <CatModal showModal={showModal} hide={hide} modalInput={modalInput} edit={edit} remove={remove} />

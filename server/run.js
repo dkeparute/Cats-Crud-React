@@ -129,14 +129,12 @@ app.get('/cats-breed', (req, res) => {
     FROM cats
     `;
     con.query(sql, (err, results) => {
-        if (err) {
-            throw err;
-        }
-        res.send(results);
-
+      if (err) {
+        throw err;
+      }
+      res.send(results);
     })
-})
-
+  })
 //46. Is duomenu bazes rodo tam tikros rusies gyvunus
 app.get('/cats-filter/:b', (req, res) => {
     const sql = `
@@ -144,11 +142,11 @@ app.get('/cats-filter/:b', (req, res) => {
     FROM cats
     WHERE breed = ?
     `;
+    console.log(req.query.s);
     con.query(sql, [req.params.b], (err, results) => {
-        if (err) {
-            throw err;
-        }
-        res.send(results);
-
+      if (err) {
+        throw err;
+      }
+      res.send(results);
     })
-})
+  })
