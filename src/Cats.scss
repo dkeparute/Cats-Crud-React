@@ -7,6 +7,7 @@
   align-items: center;
   margin-top: 50px;
   position: relative;
+  background-color: #9733ee;
 
   // VISU katinu saraso isdestymas,
   .cats-list {
@@ -120,6 +121,23 @@
         width: 150px;
         color: #a55a86;
       }
+      // modalo lenteles pabaiga
+    }
+  }
+  // filtro isdestymas
+  .general-filter {
+    height: 100px;
+    width: 500px;
+    background-color: #e6fdb0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    .each-filter {
+      margin-top: 20px;
+      span {
+        padding: 0 10px;
+        color: #a55a86;
+      }
     }
   }
   button {
@@ -149,17 +167,14 @@
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-
 }
 
 /* Large devices (laptops/desktops, 992px and up) */

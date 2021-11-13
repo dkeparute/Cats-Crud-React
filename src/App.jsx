@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import CatFilter from "./Components/CatFilter";
 import CatModal from "./Components/CatModal";
 import CatsList from "./Components/CatsList";
 import NewCat from "./Components/NewCat";
@@ -82,9 +83,10 @@ function App() {
   return (
     <div className='cats'>
       {/* 11. create perduodame kaip propsa */}
+      <CatFilter />
       <NewCat create={create} />
       <CatsList allCats={allCats} modal={modal} />
-      <CatModal showModal={showModal} hide={hide} modalInput={modalInput} edit={edit} remove={remove}/>
+      <CatModal showModal={showModal} hide={hide} modalInput={modalInput} edit={edit} remove={remove} />
     </div>
   );
 }
