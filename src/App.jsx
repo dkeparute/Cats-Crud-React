@@ -10,7 +10,8 @@ function App() {
   // 42.sukuriamas steitas tam kad butu galima fiksuoti filtravimo rezultatus
   const [breed, setBreed] = useState([]);
 
-  // 45.sukuriamas filtras, kai jis pasikeis paleisime filtravima
+  // 45.sukuriamas filtras, kai jis pasikeis paleisime filtravima.
+  // kai filtras pasikeicia mes turesime siusti uzklausa i serveri ir is serverio gausime atsakyma su jau nufiltruotais duomenimis
   const [filter, setFilter] = useState('');
 
   // 18. sukuriamas STATE skirta sparodyti arba paslepti modala ir perduodame per APP i modal komponenta
@@ -74,18 +75,27 @@ function App() {
         console.log(res.data);
       })
   }
+  // 47. useffect kai pasikeicia fillter
+  useEffect(() => {
+    if (filter) {
+      axios.get('http://localhost:3003/cats-filter/' + filter)
+        .then(res => {
+          setBreed(res.data);
+          console.log(res.data);
+        })
+    }
+  }, [filter])
 
-// 43. suteikiam reaktui galimybe optimatizuotis, jeigu sudetume i viena vieta, reaktas negaletu optimatizuotis, filtro metu reaktas atsinaujins
-
-useEffect(() => {
-  axios.get('http://localhost:3003/cats-breed')
-    .then(res => {
-      // 44. pasetinam setbreed ir atiduodame i komponenta cat filter per APP
-      setBreed(res.data);
-      console.log(res.data);
-    })
-  //  14. seka update
-}, [update])
+  // 43. suteikiam reaktui galimybe optimatizuotis, jeigu sudetume i viena vieta, reaktas negaletu optimatizuotis, filtro metu reaktas atsinaujins
+  useEffect(() => {
+    axios.get('http://localhost:3003/cats-breed')
+      .then(res => {
+        // 44. pasetinam setbreed ir atiduodame i komponenta cat filter per APP
+        setBreed(res.data);
+        console.log(res.data);
+      })
+    //  14. seka update
+  }, [update])
 
   //2. Atvaizduojami visi duomenys is duomenu bazes
   useEffect(() => {
@@ -101,7 +111,8 @@ useEffect(() => {
   return (
     <div className='cats'>
       {/* 11. create perduodame kaip propsa */}
-      <CatFilter breed={breed} />
+      {/*47. kai keiciasi filtras tai turi pasisetinti elementai */}
+      <CatFilter breed={breed} setFilter={setFilter} />
       <NewCat create={create} />
       <CatsList allCats={allCats} modal={modal} />
       <CatModal showModal={showModal} hide={hide} modalInput={modalInput} edit={edit} remove={remove} />

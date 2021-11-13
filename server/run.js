@@ -122,13 +122,29 @@ app.delete('/cats/:id', (req, res) => {
     })
 })
 
-// 41. Randa filtro deka visus skirtingas kaciu rusis
+// 41. Randa visus skirtingas kaciu rusis
 app.get('/cats-breed', (req, res) => {
     const sql = `
     SELECT DISTINCT breed
     FROM cats
     `;
     con.query(sql, (err, results) => {
+        if (err) {
+            throw err;
+        }
+        res.send(results);
+
+    })
+})
+
+//46. Is duomenu bazes rodo tam tikros rusies gyvunus
+app.get('/cats-filter/:b', (req, res) => {
+    const sql = `
+    SELECT *
+    FROM cats
+    WHERE breed = ?
+    `;
+    con.query(sql, [req.params.b], (err, results) => {
         if (err) {
             throw err;
         }
