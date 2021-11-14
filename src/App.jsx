@@ -7,6 +7,15 @@ import NewCat from "./Components/NewCat";
 
 function App() {
 
+  // jeigu norisi jog data butu grazi tai pasetinam prie cats (2):
+  const dateOnly = (data) => {
+    return data.map(a => {
+      a.age = a.age.slice(0, 10);
+      return a;
+    }
+    )
+  }
+
   // 58.
   const [search, setSearch] = useState('[');
 
@@ -94,16 +103,16 @@ function App() {
     }
   }, [filter])
 
-// 59. useffect kai pasikeicia search
-useEffect(() => {
-  if (search) {
-    axios.get('http://localhost:3003/cats-behaviour/?s=' + search)
-      .then(res => {
-        setAllCats(res.data);
-        console.log(res.data);
-      })
-  }
-}, [search])
+  // 59. useffect kai pasikeicia search
+  useEffect(() => {
+    if (search) {
+      axios.get('http://localhost:3003/cats-behaviour/?s=' + search)
+        .then(res => {
+          setAllCats(res.data);
+          console.log(res.data);
+        })
+    }
+  }, [search])
 
   // 43. suteikiam reaktui galimybe optimatizuotis, jeigu sudetume i viena vieta, reaktas negaletu optimatizuotis, filtro metu reaktas atsinaujins
   useEffect(() => {
@@ -120,7 +129,7 @@ useEffect(() => {
     axios.get('http://localhost:3003/cats')
       .then(res => {
         // 5. pasetinam visas kates
-        setAllCats(res.data)
+        setAllCats(dateOnly(res.data));
         console.log(res.data);
       })
     //  14. seka update
