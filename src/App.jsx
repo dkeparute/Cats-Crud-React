@@ -4,10 +4,15 @@ import CatFilter from "./Components/CatFilter";
 import CatModal from "./Components/CatModal";
 import CatsList from "./Components/CatsList";
 import NewCat from "./Components/NewCat";
+// 66.
+import catsSort from "./Common/catsSort";
 
 function App() {
 
-    // 58.
+  // 62. steitas pasakos pagal ka mes rusiuojam perduodam per APP i komponenta
+  // const [sort, setSort] = useState('');
+
+  // 58.
   const [search, setSearch] = useState('[');
 
   // 42.sukuriamas steitas tam kad butu galima fiksuoti filtravimo rezultatus
@@ -83,6 +88,19 @@ function App() {
         console.log(res.data);
       })
   }
+
+  // 65.
+  const sort = (by) =>{
+    setAllCats(catsSort(allCats, by));
+  }
+
+  // 64.
+  // useEffect(() => {
+  //   if (sort) {
+  //     setAllCats(catsSort(allCats, sort));
+  //   }
+  // }, [sort])
+
   // 47. useffect kai pasikeicia fillter
   useEffect(() => {
     if (filter) {
@@ -130,7 +148,7 @@ function App() {
     <div className='cats'>
       {/* 11. create perduodame kaip propsa */}
       {/*48. kai keiciasi filtras tai turi pasisetinti elementai */}
-      <CatFilter breed={breed} setFilter={setFilter} reset={reset} setSearch={setSearch} />
+      <CatFilter breed={breed} setFilter={setFilter} reset={reset} setSearch={setSearch} setSort={sort} />
       <NewCat create={create} />
       <CatsList allCats={allCats} modal={modal} />
       <CatModal showModal={showModal} hide={hide} modalInput={modalInput} edit={edit} remove={remove} />

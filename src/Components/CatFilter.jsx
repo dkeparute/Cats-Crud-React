@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-function CatFilter({ breed, setFilter, reset, setSearch }) {
+function CatFilter({ breed, setFilter, reset, setSearch, setSort }) {
 
     // 50. 
     const [filterValue, setFilterValue] = useState('');
@@ -23,6 +23,8 @@ function CatFilter({ breed, setFilter, reset, setSearch }) {
     const [sortValue, setSortValue] = useState('');
     const selectSort = e => {
         setSortValue(e.target.value);
+        // 63.
+        setSort(e.target.value);
     }
 
 
@@ -55,14 +57,14 @@ function CatFilter({ breed, setFilter, reset, setSearch }) {
                 <span>Cats sort: </span>
                 <select onChange={selectSort} value={sortValue}>
                     <option value="">Sort by:</option>
-                    <option value="">Sort by breed Asc:</option>
-                    <option value="">Sort by breed Desc</option>
-                    <option value="">Sort by size Asc:</option>
-                    <option value="">Sort by size Desc</option>
-                    <option value="">Sort by behaviour Asc:</option>
-                    <option value="">Sort by behaviou Desc</option>
-                    <option value="">Sort by age Asc:</option>
-                    <option value="">Sort by age Desc</option>
+                    <option value="breed_Asc">Sort by breed Asc:</option>
+                    <option value="breed_Desc">Sort by breed Desc</option>
+                    <option value="size_Asc">Sort by size Asc:</option>
+                    <option value="size_Desc">Sort by size Desc</option>
+                    <option value="behaviour_Asc">Sort by behaviour Asc:</option>
+                    <option value="behaviour_Desc">Sort by behaviou Desc</option>
+                    <option value="age_Asc">Sort by age Asc:</option>
+                    <option value="age_Desc">Sort by age Desc</option>
                 </select>
             </div>
             {/* 51. sukuriamas RESET mygtukas ir jo funkcionalumas ir jis perduodamas i APP */}
