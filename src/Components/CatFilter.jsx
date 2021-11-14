@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-function CatFilter({ breed, setFilter, reset }) {
+function CatFilter({ breed, setFilter, reset, setSearch }) {
 
     // 50. 
     const [filterValue, setFilterValue] = useState('');
@@ -11,6 +11,16 @@ function CatFilter({ breed, setFilter, reset }) {
         setFilterValue(e.target.value);
         setFilter(e.target.value);
     }
+
+
+    // 57. sukuriam set search kuri perduodam i APP
+    const [searchValue, setSearchValue] = useState('');
+
+    const selectSearch = e => {
+        setSearchValue(e.target.value);
+        setSearch(e.target.value);
+    }
+
 
     // 54.
     const resetHandler = () => {
@@ -30,6 +40,11 @@ function CatFilter({ breed, setFilter, reset }) {
                     <option value="">Select cat</option>
                     {breed.map(b => <option key={b.breed} value={b.breed}>{b.breed}</option>)}
                 </select>
+            </div>
+            {/* 56. sukuriamas SEARCH su input */}
+            <div className='each-filter'>
+                <span> Cat search by behaviour: </span>
+                <input type="text" placeholder='insert any letter' required value={searchValue} onChange={selectSearch} />
             </div>
             {/* 51. sukuriamas RESET mygtukas ir jo funkcionalumas ir jis perduodamas i APP */}
             <div className='each-filter'>

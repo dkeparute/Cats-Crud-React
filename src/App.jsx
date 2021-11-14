@@ -7,6 +7,9 @@ import NewCat from "./Components/NewCat";
 
 function App() {
 
+  // 58.
+  const [search, setSearch] = useState('[');
+
   // 42.sukuriamas steitas tam kad butu galima fiksuoti filtravimo rezultatus
   const [breed, setBreed] = useState([]);
 
@@ -91,6 +94,17 @@ function App() {
     }
   }, [filter])
 
+// 59. useffect kai pasikeicia search
+useEffect(() => {
+  if (search) {
+    axios.get('http://localhost:3003/cats-behaviour/?s=' + search)
+      .then(res => {
+        setAllCats(res.data);
+        console.log(res.data);
+      })
+  }
+}, [search])
+
   // 43. suteikiam reaktui galimybe optimatizuotis, jeigu sudetume i viena vieta, reaktas negaletu optimatizuotis, filtro metu reaktas atsinaujins
   useEffect(() => {
     axios.get('http://localhost:3003/cats-breed')
@@ -116,7 +130,7 @@ function App() {
     <div className='cats'>
       {/* 11. create perduodame kaip propsa */}
       {/*48. kai keiciasi filtras tai turi pasisetinti elementai */}
-      <CatFilter breed={breed} setFilter={setFilter} reset={reset} />
+      <CatFilter breed={breed} setFilter={setFilter} reset={reset} setSearch={setSearch} />
       <NewCat create={create} />
       <CatsList allCats={allCats} modal={modal} />
       <CatModal showModal={showModal} hide={hide} modalInput={modalInput} edit={edit} remove={remove} />

@@ -135,6 +135,7 @@ app.get('/cats-breed', (req, res) => {
         res.send(results);
     })
 })
+
 //46. Is duomenu bazes rodo tam tikros rusies gyvunus
 app.get('/cats-filter/:b', (req, res) => {
     const sql = `
@@ -143,6 +144,21 @@ app.get('/cats-filter/:b', (req, res) => {
     WHERE breed = ?
     `;
     con.query(sql, [req.params.b], (err, results) => {
+        if (err) {
+            throw err;
+        }
+        res.send(results);
+    })
+})
+
+// 55. Paieska pagal kates buda
+app.get('/cats-behaviour', (req, res) => {
+    const sql = `
+    SELECT *
+    FROM cats
+    WHERE behaviour LIKE ?
+    `;
+    con.query(sql, ['%' + req.query.s + '%'], (err, results) => {
         if (err) {
             throw err;
         }
