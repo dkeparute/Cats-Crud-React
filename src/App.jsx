@@ -45,6 +45,11 @@ function App() {
     setShowModal(false);
   }
 
+  // 52. paspaudus reset atnaujinama informacija
+  const reset = () => {
+    setUpdate(Date.now());
+  }
+
   //  38. istriname gyvuna
   const remove = (id) => {
     setShowModal(false);
@@ -110,8 +115,8 @@ function App() {
   return (
     <div className='cats'>
       {/* 11. create perduodame kaip propsa */}
-      {/*47. kai keiciasi filtras tai turi pasisetinti elementai */}
-      <CatFilter breed={breed} filter={setFilter} />
+      {/*48. kai keiciasi filtras tai turi pasisetinti elementai */}
+      <CatFilter breed={breed} setFilter={setFilter} reset={reset} />
       <NewCat create={create} />
       <CatsList allCats={allCats} modal={modal} />
       <CatModal showModal={showModal} hide={hide} modalInput={modalInput} edit={edit} remove={remove} />

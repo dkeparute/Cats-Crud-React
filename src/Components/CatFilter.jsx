@@ -2,14 +2,14 @@
 
 import { useState } from "react";
 
-function CatFilter({ breed, filter}) {
+function CatFilter({ breed, setFilter, reset }) {
 
-    // 49. 
+    // 50. 
     const [filterValue, setFilterValue] = useState('');
 
     const selectFilter = e => {
         setFilterValue(e.target.value);
-        filter(e.target.value);
+        setFilter(e.target.value);
     }
 
     return (
@@ -17,12 +17,16 @@ function CatFilter({ breed, filter}) {
             <div className='each-filter'>
                 <span>Cat filter by breed: </span>
                 {/* 41 sukuriamas select */}
-                {/* 48. onChange sukuriamas hookas ir value */}
+                {/* 49. onChange sukuriamas hookas ir value */}
                 <select onChange={selectFilter} value={filterValue}>
                     {/* 44. breed SUMEPINA */}
-                    {breed.map(b => <option key={b.breed} value={b.breed}>{b.breed}</option>)}
                     <option value="">Select cat</option>
+                    {breed.map(b => <option key={b.breed} value={b.breed}>{b.breed}</option>)}
                 </select>
+            </div>
+            {/* 51. sukuriamas RESET mygtukas ir jo funkcionalumas ir jis perduodamas i APP */}
+            <div className='each-filter'>
+                <button onClick={reset}>Reset</button>
             </div>
 
         </div>

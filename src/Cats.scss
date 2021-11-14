@@ -126,17 +126,43 @@
   }
   // filtro isdestymas
   .general-filter {
-    height: 100px;
-    width: 500px;
-    background-color: #e6fdb0;
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    position: relative;
+    background-color: #11e4f3;
+
     .each-filter {
-      margin-top: 20px;
+      border: 1px solid #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      justify-items: center;
+      flex-direction: row;
+      flex-wrap: wrap;
+      padding: 10px;
+      margin: 20px;
+      font-size: 20px;
+      color: #234d4f;
+      text-align: center;
+      font-weight: bold;
+      background-color: rgb(85, 245, 144);
       span {
         padding: 0 10px;
-        color: #a55a86;
+        color: #c5178b;
+        font-style: italic;
+      }
+      select {
+        background-color: #b5ecf0;
+
+        option {
+          color: #c5178b;
+          font-style: italic;
+        }
       }
     }
   }
