@@ -12,6 +12,13 @@ function CatFilter({ breed, setFilter, reset }) {
         setFilter(e.target.value);
     }
 
+    // 54.
+    const resetHandler = () => {
+        reset();
+        setFilterValue('');
+
+    }
+
     return (
         <div className='general-filter'>
             <div className='each-filter'>
@@ -26,7 +33,9 @@ function CatFilter({ breed, setFilter, reset }) {
             </div>
             {/* 51. sukuriamas RESET mygtukas ir jo funkcionalumas ir jis perduodamas i APP */}
             <div className='each-filter'>
-                <button onClick={reset}>Reset</button>
+                {/* <button onClick={reset}>Reset</button> */}
+                {/* 53. sukuriamas resetHandleris  */}
+                <button onClick={resetHandler}>Reset</button>
             </div>
 
         </div>
