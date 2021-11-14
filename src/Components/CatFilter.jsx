@@ -6,7 +6,6 @@ function CatFilter({ breed, setFilter, reset, setSearch }) {
 
     // 50. 
     const [filterValue, setFilterValue] = useState('');
-
     const selectFilter = e => {
         setFilterValue(e.target.value);
         setFilter(e.target.value);
@@ -15,10 +14,15 @@ function CatFilter({ breed, setFilter, reset, setSearch }) {
 
     // 57. sukuriam set search kuri perduodam i APP
     const [searchValue, setSearchValue] = useState('');
-
     const selectSearch = e => {
         setSearchValue(e.target.value);
         setSearch(e.target.value);
+    }
+
+    // 61.
+    const [sortValue, setSortValue] = useState('');
+    const selectSort = e => {
+        setSortValue(e.target.value);
     }
 
 
@@ -37,7 +41,7 @@ function CatFilter({ breed, setFilter, reset, setSearch }) {
                 {/* 49. onChange sukuriamas hookas ir value */}
                 <select onChange={selectFilter} value={filterValue}>
                     {/* 44. breed SUMEPINA */}
-                    <option value="">Select cat</option>
+                    <option value="">Select cat:</option>
                     {breed.map(b => <option key={b.breed} value={b.breed}>{b.breed}</option>)}
                 </select>
             </div>
@@ -45,6 +49,21 @@ function CatFilter({ breed, setFilter, reset, setSearch }) {
             <div className='each-filter'>
                 <span> Cat search by behaviour: </span>
                 <input type="text" placeholder='insert any letter' required value={searchValue} onChange={selectSearch} />
+            </div>
+            {/* 60. sukuriamas RUSIAVIMAS */}
+            <div className='each-filter'>
+                <span>Cats sort: </span>
+                <select onChange={selectSort} value={sortValue}>
+                    <option value="">Sort by:</option>
+                    <option value="">Sort by breed Asc:</option>
+                    <option value="">Sort by breed Desc</option>
+                    <option value="">Sort by size Asc:</option>
+                    <option value="">Sort by size Desc</option>
+                    <option value="">Sort by behaviour Asc:</option>
+                    <option value="">Sort by behaviou Desc</option>
+                    <option value="">Sort by age Asc:</option>
+                    <option value="">Sort by age Desc</option>
+                </select>
             </div>
             {/* 51. sukuriamas RESET mygtukas ir jo funkcionalumas ir jis perduodamas i APP */}
             <div className='each-filter'>

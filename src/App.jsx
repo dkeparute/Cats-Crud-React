@@ -7,16 +7,7 @@ import NewCat from "./Components/NewCat";
 
 function App() {
 
-  // jeigu norisi jog data butu grazi tai pasetinam prie cats (2):
-  const dateOnly = (data) => {
-    return data.map(a => {
-      a.age = a.age.slice(0, 10);
-      return a;
-    }
-    )
-  }
-
-  // 58.
+    // 58.
   const [search, setSearch] = useState('[');
 
   // 42.sukuriamas steitas tam kad butu galima fiksuoti filtravimo rezultatus
@@ -129,7 +120,7 @@ function App() {
     axios.get('http://localhost:3003/cats')
       .then(res => {
         // 5. pasetinam visas kates
-        setAllCats(dateOnly(res.data));
+        setAllCats(res.data);
         console.log(res.data);
       })
     //  14. seka update
