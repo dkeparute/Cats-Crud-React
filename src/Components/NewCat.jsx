@@ -22,6 +22,13 @@ function NewCat({ create }) {
     // 12 handlinam create
     const handlecreate = () => {
         create(input);
+        // resetina paieskos info
+        setInput({
+            breed: '',
+            size: '',
+            behaviour: '',
+            age: ''
+        })
     }
 
 
@@ -37,14 +44,16 @@ function NewCat({ create }) {
                 <input type="text" placeholder='insert new weight' onChange={event => control(event, 'size')} value={input.size} required />
             </div>
             <div className='new-cat'>
-                <span>New behaviour: </span>
+                <span>New mood: </span>
                 <input type="text" placeholder='insert new characteristic' onChange={event => control(event, 'behaviour')} value={input.behaviour} required />
             </div>
             <div className='new-cat'>
                 <span>New age: </span>
                 <input type="date" onChange={event => control(event, 'age')} value={input.age} required />
             </div>
-            <button onClick={handlecreate} >Add new cat</button>
+            <div>
+                <button onClick={handlecreate} >Add cat</button>
+            </div>
         </div>
 
     );

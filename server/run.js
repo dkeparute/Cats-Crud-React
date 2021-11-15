@@ -165,3 +165,34 @@ app.get('/cats-behaviour', (req, res) => {
         res.send(results);
     })
 })
+
+// bendra statistika
+app.get('/stats', (req, res) => {
+    const sql = `
+    SELECT COUNT(id) as count, SUM(size) as size, AVG(size) as average
+    FROM cats
+    `;
+    console.log(req.query.s);
+    con.query(sql, ['%' + req.query.s + '%'], (err, results) => {
+      if (err) {
+        throw err;
+      }
+      res.send(results);
+    })
+  })
+  
+  // grupine statistika
+  app.get('/group-stats', (req, res) => {
+    const sql = `
+    select count(id) as count, breed
+    from cats
+    group by breed
+    order by breed desc
+    `;
+    con.query(sql, ['%' + req.query.s + '%'], (err, results) => {
+      if (err) {
+        throw err;
+      }
+      res.send(results);
+    })
+  })

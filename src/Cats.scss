@@ -1,13 +1,11 @@
 .cats {
   // turinio isdestymas
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   justify-items: center;
   align-items: center;
-  margin-top: 50px;
-  position: relative;
-  background-color: #9733ee;
+  flex-wrap: wrap;
 
   // VISU katinu saraso isdestymas,
   .cats-list {
@@ -30,10 +28,8 @@
     padding: 10px;
     margin: 20px;
     font-size: 20px;
-    color: #234d4f;
     text-align: center;
     font-weight: bold;
-    background-color: rgb(85, 245, 144);
     // span dizainas
     span {
       color: #e6fdb0;
@@ -50,28 +46,24 @@
   // naujo katino isdestymas
   .general-new-cat {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    justify-items: center;
+    flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
-    background-color: rgb(240, 240, 24);
+
     // naujo katino bendras fonas, sriftas, dydis
     .new-cat {
       box-shadow: 0 0 20px #eee;
       border: 1px solid #fff;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
+      justify-items: center;
       flex-direction: row;
       flex-wrap: wrap;
       padding: 10px;
       margin: 20px;
       font-size: 20px;
-      color: #234d4f;
       text-align: center;
       font-weight: bold;
-      background-color: rgb(85, 245, 144);
       // span dizainas
       span {
         color: #ee2098;
@@ -79,7 +71,8 @@
       // lenteles dydis, dizainas ir jame atvaizduojami duomenys is db
       input {
         color: #ee2098;
-        width: 150px;
+        margin-top: 5px;
+        margin-bottom: 5px;
       }
       // naujo katino lenteles pabaiga
     }
@@ -88,19 +81,22 @@
   .general-modal {
     border: 1px solid #fff;
     position: absolute;
-    top: 0;
-    background-color: #f05d9d;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    justify-items: center;
     align-items: center;
-    flex-wrap: wrap;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    background-image: url("./img/img.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: left;
+    background-size: cover;
+
     // modalo bendras fonas, sriftas, dydis
     .each-module {
+      box-shadow: 0 0 20px #eee;
       border: 1px solid #fff;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       justify-items: center;
       flex-direction: row;
@@ -108,17 +104,15 @@
       padding: 10px;
       margin: 20px;
       font-size: 20px;
-      color: #234d4f;
       text-align: center;
       font-weight: bold;
-      background-color: rgb(85, 245, 144);
       // span dizainas
       span {
         color: rgb(240, 240, 24);
+        padding: 5px;
       }
       // lenteles dydis, dizainas ir jame atvaizduojami duomenys is serverio
       input {
-        width: 150px;
         color: #a55a86;
       }
       // modalo lenteles pabaiga
@@ -128,42 +122,80 @@
   .general-filter {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    justify-items: center;
     align-items: center;
-    margin-top: 50px;
-    margin-bottom: 20px;
-    position: relative;
-    background-color: #11e4f3;
-
+    // filtro bendras fonas, sriftas, dydis
     .each-filter {
+      box-shadow: 0 0 20px #eee;
       border: 1px solid #fff;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      justify-items: center;
-      flex-direction: row;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-direction: column;
       flex-wrap: wrap;
       padding: 10px;
       margin: 20px;
       font-size: 20px;
-      color: #234d4f;
       text-align: center;
       font-weight: bold;
-      background-color: rgb(85, 245, 144);
+      // span dizainas
       span {
-        padding: 0 10px;
         color: #c5178b;
+        margin-bottom: 5px;
         font-style: italic;
       }
+      // seelcto dizainas
       select {
         background-color: #b5ecf0;
-
+        // option dizainas
         option {
           color: #c5178b;
           font-style: italic;
         }
       }
+      // filtro lenteles pabaiga
+    }
+  }
+  // statistikos lenteles isdestymas
+  .cats-stats {
+    box-shadow: 0 0 20px #eee;
+    border: 1px solid #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    justify-items: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+    margin-top: 1px;
+    padding: 10px;
+    span {
+      display: flex;
+      justify-content: center;
+      justify-items: center;
+      align-items: center;
+      color: #9733ee;
+      margin: 10px;
+      i {
+        color: #b5ecf0;
+        padding: 10px;
+      }
+
+      // statistikos lenteles pabaiga
+    }
+  }
+  // zinutes isdestymas
+  .cats-message {
+    display: flex;
+    justify-content: flex-start;
+    justify-items: flex-start;
+    align-items: flex-start;
+    transition: all 0.3s;
+    overflow: hidden;
+    position: absolute;
+    span {
+      padding: 5px;
+      margin: 5px;
+      color: #e6fdb0;
     }
   }
   button {
@@ -193,20 +225,130 @@
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
+  .cats {
+    .general-modal,
+    .each-module,
+    .cats-stats,
+    .cats-message {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      justify-items: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  }
+  .cats-list,
+  .cat-design,
+  .general-new-cat,
+  .new-cat,
+  .general-filter,
+  .each-filter {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
+  .cats {
+    .general-modal,
+    .each-module,
+    .cats-stats,
+    .cats-message {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      justify-items: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  }
+  .cats-list,
+  .cat-design,
+  .general-new-cat,
+  .new-cat,
+  .general-filter,
+  .each-filter {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
+  .cats {
+    .general-modal,
+    .each-module,
+    .general-filter,
+    .each-filter,
+    .cats-stats,
+    .cats-message {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      justify-items: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  }
+  .cats-list,
+  .cat-design,
+  .general-new-cat,
+  .new-cat {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+  .cats {
+    .general-modal,
+    .each-module,
+    .general-filter,
+    .each-filter,
+    .cats-stats,
+    .cats-message {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      justify-items: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  }
+  .cats-list,
+  .cat-design,
+  .general-new-cat,
+  .new-cat {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
+  .cats {
+    .general-new-cat,
+    .new-cat,
+    .general-modal,
+    .each-module,
+    .general-filter,
+    .each-filter,
+    .cats-stats,
+    .cats-message {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      justify-items: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  }
+  .cats-list,
+  .cat-design {
+    display: flex;
+    flex-direction: column;
+  }
 }

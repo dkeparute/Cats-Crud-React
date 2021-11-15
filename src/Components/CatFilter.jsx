@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-function CatFilter({ breed, setFilter, reset, setSearch, setSort }) {
+function CatFilter({ breed, setFilter, reset, setSearch, bigSort }) {
 
     // 50. 
     const [filterValue, setFilterValue] = useState('');
@@ -24,7 +24,7 @@ function CatFilter({ breed, setFilter, reset, setSearch, setSort }) {
     const selectSort = e => {
         setSortValue(e.target.value);
         // 63.
-        setSort(e.target.value);
+        bigSort(e.target.value);
     }
 
 
@@ -32,6 +32,9 @@ function CatFilter({ breed, setFilter, reset, setSearch, setSort }) {
     const resetHandler = () => {
         reset();
         setFilterValue('');
+        setSearchValue('');
+        setSortValue('');
+        bigSort('');
 
     }
 
@@ -49,7 +52,7 @@ function CatFilter({ breed, setFilter, reset, setSearch, setSort }) {
             </div>
             {/* 56. sukuriamas SEARCH su input */}
             <div className='each-filter'>
-                <span> Cat search by behaviour: </span>
+                <span> Cat search by: </span>
                 <input type="text" placeholder='insert any letter' required value={searchValue} onChange={selectSearch} />
             </div>
             {/* 60. sukuriamas RUSIAVIMAS */}
@@ -68,7 +71,7 @@ function CatFilter({ breed, setFilter, reset, setSearch, setSort }) {
                 </select>
             </div>
             {/* 51. sukuriamas RESET mygtukas ir jo funkcionalumas ir jis perduodamas i APP */}
-            <div className='each-filter'>
+            <div>
                 {/* <button onClick={reset}>Reset</button> */}
                 {/* 53. sukuriamas resetHandleris  */}
                 <button onClick={resetHandler}>Reset</button>

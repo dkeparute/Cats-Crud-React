@@ -1,35 +1,24 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import CatFilter from "./Components/CatFilter";
 import CatModal from "./Components/CatModal";
 import CatsList from "./Components/CatsList";
 import NewCat from "./Components/NewCat";
 // 66.
 import catsSort from "./Common/catsSort";
+import CatsMessage from "./Components/CatsMessage";
+import CatsStatistic from "./Components/CatsStatistic";
 
 function App() {
 
-  // 62. steitas pasakos pagal ka mes rusiuojam perduodam per APP i komponenta
-  // const [sort, setSort] = useState('');
-
-  // 58.
-  const [search, setSearch] = useState('[');
-
-  // 42.sukuriamas steitas tam kad butu galima fiksuoti filtravimo rezultatus
-  const [breed, setBreed] = useState([]);
-
-  // 45.sukuriamas filtras, kai jis pasikeis paleisime filtravima.
-  // kai filtras pasikeicia mes turesime siusti uzklausa i serveri ir is serverio gausime atsakyma su jau nufiltruotais duomenimis
-  const [filter, setFilter] = useState('');
-
-  // 18. sukuriamas STATE skirta sparodyti arba paslepti modala ir perduodame per APP i modal komponenta
-  const [showModal, setShowModal] = useState(false);
+  //4.  sukuriamas allcats hookas nurodantis STATE 
+  const [allCats, setAllCats] = useState([]);
 
   // 13. tam kad pasikeistu informacija tada kai ji tikrai pasikeicia
   const [update, setUpdate] = useState(Date.now());
 
-  //4.  sukuriamas allcats hookas nurodantis STATE 
-  const [allCats, setAllCats] = useState([]);
+  // 18. sukuriamas STATE skirta sparodyti arba paslepti modala ir perduodame per APP i modal komponenta
+  const [showModal, setShowModal] = useState(false);
 
   // 29 pasidarom state kuris rodysi modal kate ir perduodam per APP i modalo komponenta
   const [modalInput, setModalInput] = useState({
@@ -38,6 +27,60 @@ function App() {
     behaviour: '',
     age: ''
   })
+
+  // 42.sukuriamas steitas tam kad butu galima fiksuoti filtravimo rezultatus
+  const [breed, setBreed] = useState([]);
+
+  // 45.sukuriamas filtras, kai jis pasikeis paleisime filtravima.
+  // kai filtras pasikeicia mes turesime siusti uzklausa i serveri ir is serverio gausime atsakyma su jau nufiltruotais duomenimis
+  const [filter, setFilter] = useState('');
+
+  // 58.
+  const [search, setSearch] = useState('');
+
+  // 62. steitas pasakos pagal ka mes rusiuojam perduodam per APP i komponenta
+  // const [sort, setSort] = useState('');
+
+  const sort = useRef('');
+
+  // statistika
+  const [stats, setStats] = useState({
+    count: 0,
+    size: 0,
+    average: 0
+  });
+
+  // group statistika
+  const [groupStats, setGroupStats] = useState([]);
+
+  // zinute
+  const [showMsg, setShowMsg] = useState(false);
+  const msg = useRef('labas');
+  const addMsg = text => {
+    msg.current = text;
+    setShowMsg(true);
+    setTimeout(() => { clearMsg() }, 2000);
+  }
+  const clearMsg = () => {
+    setShowMsg(false);
+  }
+
+  useEffect(() => {
+    axios.get('http://localhost:3003/stats')
+      .then(res => {
+        setStats(res.data[0]);
+        console.log(res.data);
+      })
+  }, [update])
+
+  // group by statistika
+  useEffect(() => {
+    axios.get('http://localhost:3003/group-stats')
+      .then(res => {
+        setGroupStats(res.data)
+        console.log(res);
+      })
+  }, [update])
 
   // 20. sukuriam modala ir perduodam modal per catslist iki onecat komponento
   // 28 modal perduos katina
@@ -84,22 +127,17 @@ function App() {
     axios.post('http://localhost:3003/cats', oneCat)
       .then(res => {
         // 15 setinam naujausia update
+        addMsg('Item was added');
         setUpdate(Date.now());
         console.log(res.data);
       })
   }
 
-  // 65.
-  const sort = (by) =>{
-    setAllCats(catsSort(allCats, by));
+  // 64-65.
+  const bigSort = (by) => {
+    setAllCats(catsSort(allCats, by))
+    sort.current = by;
   }
-
-  // 64.
-  // useEffect(() => {
-  //   if (sort) {
-  //     setAllCats(catsSort(allCats, sort));
-  //   }
-  // }, [sort])
 
   // 47. useffect kai pasikeicia fillter
   useEffect(() => {
@@ -133,22 +171,32 @@ function App() {
       })
   }, [update])
 
-  //2. Atvaizduojami visi duomenys is duomenu bazes
+  // //2. Atvaizduojami visi duomenys is duomenu bazes
+  // useEffect(() => {
+  //   axios.get('http://localhost:3003/cats')
+  //     .then(res => {
+  //       // 5. pasetinam visas kates
+  //       setAllCats(res.data);
+  //       console.log(res.data);
+  //     })
+  //   //  14. seka update
+  // }, [update])
+
+  // veikiantis sortas
   useEffect(() => {
     axios.get('http://localhost:3003/cats')
       .then(res => {
-        // 5. pasetinam visas kates
-        setAllCats(res.data);
-        console.log(res.data);
+        setAllCats(catsSort((res.data), sort.current));
       })
-    //  14. seka update
   }, [update])
 
   return (
     <div className='cats'>
       {/* 11. create perduodame kaip propsa */}
       {/*48. kai keiciasi filtras tai turi pasisetinti elementai */}
-      <CatFilter breed={breed} setFilter={setFilter} reset={reset} setSearch={setSearch} setSort={sort} />
+      <CatsMessage msg={msg.current} showMsg={showMsg} />
+      <CatsStatistic stats={stats} groupStats={groupStats} />
+      <CatFilter breed={breed} setFilter={setFilter} reset={reset} setSearch={setSearch} bigSort={bigSort} />
       <NewCat create={create} />
       <CatsList allCats={allCats} modal={modal} />
       <CatModal showModal={showModal} hide={hide} modalInput={modalInput} edit={edit} remove={remove} />
